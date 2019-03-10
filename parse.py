@@ -1,6 +1,7 @@
 from transform import *
 from matrix import *
 from draw import *
+from curve import *
 
 def argify(line):
     args = line.split()
@@ -19,6 +20,12 @@ def parse(fname, edge, orders, screen, color):
         "translate": translate,
         "rotate": rotate
     }
+    shape = {
+        "line": add_edge,
+        "circle": circle,
+        "hermite": hermite,
+        "bezier": bezier
+    }
     f = open(fname, 'r')
 
     for line in f:
@@ -29,10 +36,11 @@ def parse(fname, edge, orders, screen, color):
             args = f.next()
             #print(args)
             args = argify(args)
-            if line == "line":
-                transform[line](edge,args)
-            else:
-                transform[line](orders,args)
+            transform[line](orders,args)
+        elif line in shape:
+            args = f.next()
+            args = argify(args)
+            shape[line](edge,args)
         elif line == "apply":
             matrix_mult(orders,edge)
             clear_screen(screen)
