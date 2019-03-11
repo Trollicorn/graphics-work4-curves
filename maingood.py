@@ -11,4 +11,4 @@ edges = []
 transform = new_matrix()
 ident(transform)
 
-parse("script",edges,transform,screen,color)
+parse("good",edges,transform,screen,color)

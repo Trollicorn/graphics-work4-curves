@@ -15,7 +15,6 @@ def argify(line):
 
 def parse(fname, edge, orders, screen, color):
     transform = {
-        "line": add_edge,
         "scale": dilate,
         "translate": translate,
         "rotate": rotate
